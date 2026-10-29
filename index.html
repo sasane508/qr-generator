@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free High-Quality QR Code Generator</title>
+    <!-- QR Code Library CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            color: #1c1e21;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 15px;
+            min-height: 100vh;
+        }
+        .app-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #0d6efd;
+        }
+        p.subtitle {
+            font-size: 14px;
+            color: #65676b;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus {
+            border-color: #0d6efd;
+        }
+        .btn-main {
+            background-color: #0d6efd;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-main:hover {
+            background-color: #0b5ed7;
+        }
+        #qr-wrap {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #qrcode {
+            padding: 15px;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        .btn-download {
+            margin-top: 15px;
+            background-color: #198754;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: none;
+            transition: background 0.2s;
+        }
+        .btn-download:hover {
+            background-color: #157347;
+        }
+        /* SEO Info Section below tool */
+        .info-section {
+            width: 100%;
+            max-width: 450px;
+            margin-top: 30px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444;
+        }
+        .info-section h3 {
+            color: #222;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-card">
+        <h1>QR Code Generator</h1>
+        <p class="subtitle">Enter text, URL or UPI ID to generate instant QR Code</p>
+
+        <div class="form-group">
+            <label for="qr-text">Website URL / Text / Number:</label>
+            <input type="text" id="qr-text" placeholder="e.g. https://google.com ya PayTM URL">
+        </div>
+
+        <button class="btn-main" onclick="makeQR()">Generate QR Code</button>
+
+        <div id="qr-wrap">
+            <div id="qrcode"></div>
+            <button id="download-btn" class="btn-download" onclick="downloadQR()">📥 Download PNG Image</button>
+        </div>
+    </div>
+
+    <!-- Helpful Content for SEO & User Guide -->
+    <div class="info-section">
+        <h3>How to use this tool?</h3>
+        <p>1. Type or paste your Website link, UPI ID, or Text in the box above.</p>
+        <p>2. Click on <strong>Generate QR Code</strong> button.</p>
+        <p>3. Click <strong>Download PNG Image</strong> to save it directly to your phone or PC.</p>
+    </div>
+
+    <script>
+        let qrContainer = document.getElementById("qrcode");
+        let downloadBtn = document.getElementById("download-btn");
+        let qrObj = null;
+
+        function makeQR() {
+            let inputVal = document.getElementById("qr-text").value.trim();
+
+            if (!inputVal) {
+                alert("Kripya pehle text ya link enter karein!");
+                return;
+            }
+
+            // Screen saaf karein
+            qrContainer.innerHTML = "";
+            downloadBtn.style.display = "none";
+
+            // QR Code generate karein
+            qrObj = new QRCode(qrContainer, {
+                text: inputVal,
+                width: 200,
+                height: 200,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            // Delay dekar Download Button show karein taaki image render ho jaye
+            setTimeout(() => {
+                let img = qrContainer.querySelector("img");
+                let canvas = qrContainer.querySelector("canvas");
+                if (img || canvas) {
+                    downloadBtn.style.display = "inline-block";
+                }
+            }, 300);
+        }
+
+        function downloadQR() {
+            let img = qrContainer.querySelector("img");
+            let canvas = qrContainer.querySelector("canvas");
+
+            let imageSrc = "";
+
+            if (img && img.src) {
+                imageSrc = img.src;
+            } else if (canvas) {
+                imageSrc = canvas.toDataURL("image/png");
+            }
+
+            if (imageSrc) {
+                let link = document.createElement("a");
+                link.href = imageSrc;
+                link.download = "qrcode.png";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                alert("QR Code download karne mein samasya aayi. Kripya firse try karein.");
+            }
+        }
+    </script>
+</body>
+</html>
