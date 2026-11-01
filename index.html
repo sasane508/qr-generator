@@ -125,6 +125,65 @@
             color: #222;
             margin-bottom: 8px;
         }
+/* Articles Styling */
+        .article-container {
+            width: 100%;
+            max-width: 700px;
+            margin-top: 30px;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+        .article-container h2 {
+            color: #0d6efd;
+            font-size: 22px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        .article-box {
+            margin-bottom: 25px;
+        }
+        .article-box h3 {
+            font-size: 17px;
+            color: #222;
+            margin-bottom: 8px;
+        }
+        .article-box p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 10px;
+        }
+        .article-box ul, .article-box ol {
+            margin-left: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444;
+        }
+        .article-box li {
+            margin-bottom: 6px;
+        }
+        .rating-widget {
+            margin-top: 30px;
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        .rating-sub {
+            font-size: 13px;
+            color: #6c757d;
+        }
+        .stars {
+            font-size: 24px;
+            color: #ffc107;
+            margin-top: 5px;
+            cursor: pointer;
+        }
  /* Footer Styling */
 footer {
     margin-top: 40px;
@@ -155,11 +214,20 @@ footer .footer-links a:hover {
         <h1>QR Code Generator</h1>
         <p class="subtitle">Enter text, URL or UPI ID to generate instant QR Code</p>
 
-        <div class="form-group">
-            <label for="qr-text">Website URL / Text / Number:</label>
-            <input type="text" id="qr-text" placeholder="e.g. https://google.com ya PayTM URL">
-        </div>
+        <!-- QR Type Selector -->
+<div class="input-group" style="margin-bottom: 15px; text-align: left;">
+    <label for="qrType" style="font-weight: 600; font-size: 14px; color: #333;">Select QR Type:</label>
+    <select id="qrType" onchange="toggleInputFields()" style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px;">
+        <option value="text">Website URL / Text / Number</option>
+        <option value="google_review">Google Business Review Link</option>
+    </select>
+</div>
 
+<!-- Dynamic Input Area -->
+<div id="inputContainer" class="input-group" style="margin-bottom: 15px; text-align: left;">
+    <label for="textInput" style="font-weight: 600; font-size: 14px; color: #333;">Enter Text or URL:</label>
+    <textarea id="textInput" placeholder="Enter URL, Text, or Number..." style="width: 100%; height: 80px; padding: 10px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; resize: none;"></textarea>
+</div>
         <button class="btn-main" onclick="makeQR()">Generate QR Code</button>
 
         <div id="qr-wrap">
@@ -177,6 +245,24 @@ footer .footer-links a:hover {
     </div>
 
     <script>
+function toggleInputFields() {
+    const qrType = document.getElementById('qrType').value;
+    const container = document.getElementById('inputContainer');
+
+    if (qrType === 'text') {
+        container.innerHTML = `
+            <label for="textInput" style="font-weight: 600; font-size: 14px; color: #333;">Enter Text or URL:</label>
+            <textarea id="textInput" placeholder="Enter URL, Text, or Number..." style="width: 100%; height: 80px; padding: 10px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; resize: none;"></textarea>
+        `;
+    } 
+    else if (qrType === 'google_review') {
+        container.innerHTML = `
+            <label for="textInput" style="font-weight: 600; font-size: 14px; color: #333;">Google Review Link:</label>
+            <input type="text" id="textInput" placeholder="Paste your Google Business Review Link here..." style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px;">
+            <p style="font-size: 12px; color: #666; margin-top: 4px;">*Tip: Customers will scan this and directly land on your review page.</p>
+        `;
+    }
+}
         let qrContainer = document.getElementById("qrcode");
         let downloadBtn = document.getElementById("download-btn");
         let qrObj = null;
@@ -245,6 +331,73 @@ footer .footer-links a:hover {
         <a href="#contact">Contact</a>
     </div>
     <p>&copy; 2026 QR Code Generator. All rights reserved.</p>
+<!-- YouTube QR Code Articles Section -->
+    <div class="article-container">
+        <h2>YouTube QR Code Master Guide</h2>
+        <!-- Google Review Article (Top par dikhega) -->
+        <article class="article-box">
+            <h3>Boost Your Business Growth with a Google Review QR Code</h3>
+            <p>In today’s competitive local market, customer reviews are the biggest trust factor. When potential customers search for services near them, they rely heavily on Google Business ratings. However, asking customers to manually open Google, search for your business, and leave a review is a long process that most people skip. A <strong>Google Business Review QR Code</strong> solves this problem completely by bridging the physical and digital gap.</p>
+            <p>By placing a scannable review QR code on your billing counter, restaurant tables, product packaging, or visiting cards, you give your customers a one-tap frictionless experience. When scanned with a smartphone camera, it instantly opens your direct Google review page, making it effortless for happy customers to leave 5-star ratings on the spot. This drastically increases your review volume, boosts local SEO rankings, and builds instant brand credibility.</p>
+        </article>
+        <article class="article-box">
+            <h3>1. Explore New Opportunities with a YouTube QR Code Generator</h3>
+            <p>In today’s digital era, getting views and subscribers on YouTube requires bridging the gap between the offline and online worlds. A YouTube QR Code Generator acts as that powerful bridge. Whether you are a vlogger, musician, educator, or business owner, turning your YouTube links into scannable QR codes opens up incredible opportunities. Instead of asking people to manually search your channel name—which often leads to drop-offs—you can place a QR code on physical merchandise, business cards, posters, or packaging. When scanned, it instantly brings potential subscribers face-to-face with your content, maximizing your channel's growth potential with zero friction.</p>
+        </article>
+
+        <article class="article-box">
+            <h3>2. Benefits of QR Codes for YouTube</h3>
+            <p>Integrating QR codes into your YouTube marketing strategy comes with a massive set of advantages that traditional links simply cannot match:</p>
+            <ul>
+                <li><strong>Instant Engagement:</strong> Users don't need to type long, complicated URLs. One quick scan takes them straight to your video or channel.</li>
+                <li><strong>Higher Conversion Rates:</strong> By removing the effort of searching, viewer conversion from offline places (like flyers or banners) to online subscribers increases dramatically.</li>
+                <li><strong>Versatility Across Media:</strong> QR codes can be printed anywhere—billboards, t-shirts, product packaging, or restaurant menus—giving your brand a modern, tech-savvy edge.</li>
+                <li><strong>Trackable Success:</strong> Using dynamic or tracked links behind your QR codes allows you to see exactly how many people are scanning and engaging with your content from different locations.</li>
+            </ul>
+        </article>
+
+        <article class="article-box">
+            <h3>3. Examples of Usage: Unveiling the Potential of YouTube QR Codes</h3>
+            <p>YouTube QR codes are flexible enough to transform multiple industries and strategies. Here is how they are used across different domains:</p>
+            <ul>
+                <li><strong>Marketing Campaigns:</strong> Brands use QR codes on print ads, magazine inserts, and billboards to direct customers to promotional videos, product reveals, or commercial spots, turning passive readers into active video consumers.</li>
+                <li><strong>Event Engagement:</strong> At concerts, conferences, or workshops, organizers print QR codes on passes or banners linking to live streams, event recaps, or speaker interviews, keeping the audience hooked long after the event ends.</li>
+                <li><strong>Music Discovery:</strong> Independent artists and bands print QR codes on posters, album art, and merch. When fans scan them, they are instantly directed to a new music video or single release on YouTube, driving immediate streams and subscribers.</li>
+            </ul>
+        </article>
+
+        <article class="article-box">
+            <h3>4. What is a QR Code for YouTube?</h3>
+            <p>A QR Code for YouTube is a specific scannable barcode containing the URL of a YouTube channel, playlist, or individual video. When a smartphone camera or a QR scanner reads the black-and-white pixel pattern, it decodes the embedded web link and prompts the user's phone to open the YouTube app or browser directly to that specific video or channel page. It serves as a digital shortcut connecting physical environments (like paper, screens, or walls) directly to digital video content.</p>
+        </article>
+
+        <article class="article-box">
+            <h3>5. How to Create a QR Code for a YouTube Video?</h3>
+            <p>Creating a custom QR code for your YouTube video is simple and takes less than a minute using a free tool:</p>
+            <ol>
+                <li><strong>Copy the Link:</strong> Go to YouTube, open the video or channel you want to share, and copy its URL from the address bar.</li>
+                <li><strong>Paste into the Generator:</strong> Paste the copied link into the input box of a trusted QR Code Generator tool (like the one on this website).</li>
+                <li><strong>Generate & Customize:</strong> Click the generate button to instantly create your unique QR code.</li>
+                <li><strong>Download & Use:</strong> Download the high-quality PNG image of your QR code, and you are ready to print it on posters, share it on social media, or embed it in digital documents.</li>
+            </ol>
+        </article>
+
+        <article class="article-box">
+            <h3>6. How to Scan a QR Code for YouTube?</h3>
+            <p>Scanning a YouTube QR code is effortless and requires no special app on most modern smartphones:</p>
+            <ul>
+                <li><strong>Using a Smartphone Camera (iOS & Android):</strong> Open your phone's built-in camera app and point it steadily at the QR code for 2-3 seconds. A notification banner with the YouTube link will pop up on your screen. Tap it to open the video instantly.</li>
+                <li><strong>Using Third-Party Apps:</strong> If your phone's camera doesn't automatically detect QR codes, download any free QR scanner app from the Play Store or App Store, open it, and scan the code to view the YouTube link.</li>
+            </ul>
+        </article>
+
+        <!-- Rating Widget -->
+        <div class="rating-widget">
+            <p><strong>Was this Article Helpful?</strong></p>
+            <span class="rating-sub">Click on a Star to rate it</span>
+            <div class="stars">★ ★ ★ ★ ★</div>
+        </div>
+    </div>
 </footer>
 </body>
 </html>
